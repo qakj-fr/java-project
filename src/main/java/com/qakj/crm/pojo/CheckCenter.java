@@ -2,16 +2,32 @@ package com.qakj.crm.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class CheckCenter {
     private String suppliername;
 
     private String commodityname;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JSONField(format="yyyy-MM-dd")
     private Date manufacturedate;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JSONField(format="yyyy-MM-dd")
     private Date expire;
+    
+    private SupplierInfo supplierInfo;
 
-    public String getSuppliername() {
+    public SupplierInfo getSupplierInfo() {
+		return supplierInfo;
+	}
+
+	public void setSupplierInfo(SupplierInfo supplierInfo) {
+		this.supplierInfo = supplierInfo;
+	}
+
+	public String getSuppliername() {
         return suppliername;
     }
 

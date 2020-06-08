@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qakj.crm.mapper.CheckCenterMapper" >
+	<resultMap id="BaseResultMap2" type="com.qakj.crm.pojo.CheckCenter" >
+	    <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
+	    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
+	    <result column="manufactureDate" property="manufacturedate" jdbcType="DATE" />
+	    <result column="expire" property="expire" jdbcType="DATE" />
+		<association property="supplierInfo" javaType="com.qakj.crm.pojo.SupplierInfo">
+			<id column="id" property="id" jdbcType="INTEGER" />
+		    <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
+		    <result column="supplierAddress" property="supplieraddress" jdbcType="VARCHAR" />
+		    <result column="supplierPhone" property="supplierphone" jdbcType="VARCHAR" />
+		    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<select id="getCheckCenterAndSupplierInfo" resultMap="BaseResultMap2">
+		select 
+		supplierinfo.supplierName,
+		supplierinfo.supplierAddress,
+		supplierinfo.supplierPhone,
+		supplierinfo.commodityName,
+		checkcenter.manufactureDate,
+		checkcenter.expire
+		from 
+		supplierinfo,checkcenter
+		WHERE 
+		supplierinfo.supplierName=checkcenter.supplierName
+	</select>
+
   <resultMap id="BaseResultMap" type="com.qakj.crm.pojo.CheckCenter" >
     <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
     <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />

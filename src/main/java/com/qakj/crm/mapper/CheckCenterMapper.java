@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CheckCenterMapper {
+	List<CheckCenter> getCheckCenterAndSupplierInfo();
+	
     int countByExample(CheckCenterExample example);
 
     int deleteByExample(CheckCenterExample example);
