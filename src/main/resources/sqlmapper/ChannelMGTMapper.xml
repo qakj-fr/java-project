@@ -1,41 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qakj.crm.mapper.CheckCenterMapper" >
-	<resultMap id="BaseResultMap2" type="com.qakj.crm.pojo.CheckCenter" >
-	    <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
-	    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
-	    <result column="manufactureDate" property="manufacturedate" jdbcType="DATE" />
-	    <result column="expire" property="expire" jdbcType="DATE" />
-		<association property="supplierInfo" javaType="com.qakj.crm.pojo.SupplierInfo">
-			<id column="id" property="id" jdbcType="INTEGER" />
-		    <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
-		    <result column="supplierAddress" property="supplieraddress" jdbcType="VARCHAR" />
-		    <result column="supplierPhone" property="supplierphone" jdbcType="VARCHAR" />
-		    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
-		</association>
-	</resultMap>
-
-	<select id="getCheckCenterAndSupplierInfo" resultMap="BaseResultMap2">
-		select * from 
-		supplierinfo s,checkcenter c
-		WHERE 
-		s.supplierName=c.supplierName
-		and c.commodityName LIKE #{searchName}
-	</select>
-	
-	<delete id="deleteByPrimaryKey" parameterType="int">
-		delete from checkcenter where id=#{id}
-	</delete>
-	
-	<select id="selectAll" resultMap="BaseResultMap">
-		select * from checkcenter
-	</select>
-	
-  <resultMap id="BaseResultMap" type="com.qakj.crm.pojo.CheckCenter" >
+<mapper namespace="com.qakj.crm.mapper.ChannelMGTMapper" >
+  <resultMap id="BaseResultMap" type="com.qakj.crm.pojo.ChannelMGT" >
     <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
     <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
-    <result column="manufactureDate" property="manufacturedate" jdbcType="DATE" />
-    <result column="expire" property="expire" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -96,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    supplierName, commodityName, manufactureDate, expire
+    supplierName, manager, commodityName
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qakj.crm.pojo.CheckCenterExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qakj.crm.pojo.ChannelMGTExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from checkcenter
+    from channelmgt
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -112,69 +81,60 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.qakj.crm.pojo.CheckCenterExample" >
-    delete from checkcenter
+  <delete id="deleteByExample" parameterType="com.qakj.crm.pojo.ChannelMGTExample" >
+    delete from channelmgt
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.qakj.crm.pojo.CheckCenter" >
-    insert into checkcenter (supplierName, commodityName, manufactureDate, 
-      expire)
-    values (#{suppliername,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR}, #{manufacturedate,jdbcType=DATE}, 
-      #{expire,jdbcType=DATE})
+  <insert id="insert" parameterType="com.qakj.crm.pojo.ChannelMGT" >
+    insert into channelmgt (supplierName, manager, commodityName
+      )
+    values (#{suppliername,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.qakj.crm.pojo.CheckCenter" >
-    insert into checkcenter
+  <insert id="insertSelective" parameterType="com.qakj.crm.pojo.ChannelMGT" >
+    insert into channelmgt
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="suppliername != null" >
         supplierName,
       </if>
+      <if test="manager != null" >
+        manager,
+      </if>
       <if test="commodityname != null" >
         commodityName,
-      </if>
-      <if test="manufacturedate != null" >
-        manufactureDate,
-      </if>
-      <if test="expire != null" >
-        expire,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="suppliername != null" >
         #{suppliername,jdbcType=VARCHAR},
       </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
       <if test="commodityname != null" >
         #{commodityname,jdbcType=VARCHAR},
       </if>
-      <if test="manufacturedate != null" >
-        #{manufacturedate,jdbcType=DATE},
-      </if>
-      <if test="expire != null" >
-        #{expire,jdbcType=DATE},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.qakj.crm.pojo.CheckCenterExample" resultType="java.lang.Integer" >
-    select count(*) from checkcenter
+  <select id="countByExample" parameterType="com.qakj.crm.pojo.ChannelMGTExample" resultType="java.lang.Integer" >
+    select count(*) from channelmgt
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update checkcenter
+    update channelmgt
     <set >
       <if test="record.suppliername != null" >
         supplierName = #{record.suppliername,jdbcType=VARCHAR},
       </if>
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=VARCHAR},
+      </if>
       <if test="record.commodityname != null" >
         commodityName = #{record.commodityname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.manufacturedate != null" >
-        manufactureDate = #{record.manufacturedate,jdbcType=DATE},
-      </if>
-      <if test="record.expire != null" >
-        expire = #{record.expire,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -182,11 +142,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update checkcenter
+    update channelmgt
     set supplierName = #{record.suppliername,jdbcType=VARCHAR},
-      commodityName = #{record.commodityname,jdbcType=VARCHAR},
-      manufactureDate = #{record.manufacturedate,jdbcType=DATE},
-      expire = #{record.expire,jdbcType=DATE}
+      manager = #{record.manager,jdbcType=VARCHAR},
+      commodityName = #{record.commodityname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

@@ -7,6 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class CheckCenter {
+	
+	private Integer id;
+	
     private String suppliername;
 
     private String commodityname;
@@ -58,4 +61,12 @@ public class CheckCenter {
     public void setExpire(Date expire) {
         this.expire = expire;
     }
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }
