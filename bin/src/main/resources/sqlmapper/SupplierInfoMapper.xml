@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qakj.crm.mapper.SupplierInfoMapper" >
+
+	<select id="selectSupplierInfo" parameterType="map" resultMap="BaseResultMap">
+		select * from supplierInfo where supplierName like #{searchName}
+	</select>
+
+  <resultMap id="BaseResultMap" type="com.qakj.crm.pojo.SupplierInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="supplierName" property="suppliername" jdbcType="VARCHAR" />
+    <result column="supplierAddress" property="supplieraddress" jdbcType="VARCHAR" />
+    <result column="supplierPhone" property="supplierphone" jdbcType="VARCHAR" />
+    <result column="commodityName" property="commodityname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, supplierName, supplierAddress, supplierPhone, commodityName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qakj.crm.pojo.SupplierInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from supplierinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplierinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from supplierinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qakj.crm.pojo.SupplierInfoExample" >
+    delete from supplierinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qakj.crm.pojo.SupplierInfo" >
+    insert into supplierinfo (id, supplierName, supplierAddress, 
+      supplierPhone, commodityName)
+    values (#{id,jdbcType=INTEGER}, #{suppliername,jdbcType=VARCHAR}, #{supplieraddress,jdbcType=VARCHAR}, 
+      #{supplierphone,jdbcType=VARCHAR}, #{commodityname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qakj.crm.pojo.SupplierInfo" >
+    insert into supplierinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="suppliername != null" >
+        supplierName,
+      </if>
+      <if test="supplieraddress != null" >
+        supplierAddress,
+      </if>
+      <if test="supplierphone != null" >
+        supplierPhone,
+      </if>
+      <if test="commodityname != null" >
+        commodityName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="suppliername != null" >
+        #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="supplieraddress != null" >
+        #{supplieraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierphone != null" >
+        #{supplierphone,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        #{commodityname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qakj.crm.pojo.SupplierInfoExample" resultType="java.lang.Integer" >
+    select count(*) from supplierinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update supplierinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.suppliername != null" >
+        supplierName = #{record.suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplieraddress != null" >
+        supplierAddress = #{record.supplieraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierphone != null" >
+        supplierPhone = #{record.supplierphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityname != null" >
+        commodityName = #{record.commodityname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update supplierinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      supplierName = #{record.suppliername,jdbcType=VARCHAR},
+      supplierAddress = #{record.supplieraddress,jdbcType=VARCHAR},
+      supplierPhone = #{record.supplierphone,jdbcType=VARCHAR},
+      commodityName = #{record.commodityname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qakj.crm.pojo.SupplierInfo" >
+    update supplierinfo
+    <set >
+      <if test="suppliername != null" >
+        supplierName = #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="supplieraddress != null" >
+        supplierAddress = #{supplieraddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierphone != null" >
+        supplierPhone = #{supplierphone,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityname != null" >
+        commodityName = #{commodityname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qakj.crm.pojo.SupplierInfo" >
+    update supplierinfo
+    set supplierName = #{suppliername,jdbcType=VARCHAR},
+      supplierAddress = #{supplieraddress,jdbcType=VARCHAR},
+      supplierPhone = #{supplierphone,jdbcType=VARCHAR},
+      commodityName = #{commodityname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

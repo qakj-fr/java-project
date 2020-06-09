@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qakj.crm.mapper.SchedulemgtMapper" >
+  <resultMap id="BaseResultMap" type="com.qakj.crm.pojo.Schedulemgt" >
+    <result column="nineClock" property="nineclock" jdbcType="VARCHAR" />
+    <result column="twelveClock" property="twelveclock" jdbcType="VARCHAR" />
+    <result column="fourteenClock" property="fourteenclock" jdbcType="VARCHAR" />
+    <result column="seventeenClock" property="seventeenclock" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    nineClock, twelveClock, fourteenClock, seventeenClock
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qakj.crm.pojo.SchedulemgtExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from schedulemgt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.qakj.crm.pojo.SchedulemgtExample" >
+    delete from schedulemgt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qakj.crm.pojo.Schedulemgt" >
+    insert into schedulemgt (nineClock, twelveClock, fourteenClock, 
+      seventeenClock)
+    values (#{nineclock,jdbcType=VARCHAR}, #{twelveclock,jdbcType=VARCHAR}, #{fourteenclock,jdbcType=VARCHAR}, 
+      #{seventeenclock,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qakj.crm.pojo.Schedulemgt" >
+    insert into schedulemgt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nineclock != null" >
+        nineClock,
+      </if>
+      <if test="twelveclock != null" >
+        twelveClock,
+      </if>
+      <if test="fourteenclock != null" >
+        fourteenClock,
+      </if>
+      <if test="seventeenclock != null" >
+        seventeenClock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nineclock != null" >
+        #{nineclock,jdbcType=VARCHAR},
+      </if>
+      <if test="twelveclock != null" >
+        #{twelveclock,jdbcType=VARCHAR},
+      </if>
+      <if test="fourteenclock != null" >
+        #{fourteenclock,jdbcType=VARCHAR},
+      </if>
+      <if test="seventeenclock != null" >
+        #{seventeenclock,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qakj.crm.pojo.SchedulemgtExample" resultType="java.lang.Integer" >
+    select count(*) from schedulemgt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update schedulemgt
+    <set >
+      <if test="record.nineclock != null" >
+        nineClock = #{record.nineclock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twelveclock != null" >
+        twelveClock = #{record.twelveclock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fourteenclock != null" >
+        fourteenClock = #{record.fourteenclock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seventeenclock != null" >
+        seventeenClock = #{record.seventeenclock,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update schedulemgt
+    set nineClock = #{record.nineclock,jdbcType=VARCHAR},
+      twelveClock = #{record.twelveclock,jdbcType=VARCHAR},
+      fourteenClock = #{record.fourteenclock,jdbcType=VARCHAR},
+      seventeenClock = #{record.seventeenclock,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
