@@ -50,7 +50,7 @@ public class CustomerController {
 		customerService.deleteCustomerById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", "200");
-		map.put("msg", "删除成功");
+		map.put("msg", "退订成功");
 		return map;
 	}
 	
