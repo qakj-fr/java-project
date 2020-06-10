@@ -21,6 +21,10 @@ public class SchedulemgtServiceImpl implements SchedulemgtService{
 		List<Schedulemgt> list = sm.selectByExample(example);
 		return list;
 	}
+	@Override
+	public void addSchedulemgt(Schedulemgt s) {
+		sm.insert(s);
+	}
 
 }
 

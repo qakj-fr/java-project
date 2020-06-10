@@ -10,13 +10,21 @@ public interface SchedulemgtMapper {
 
     int deleteByExample(SchedulemgtExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(Schedulemgt record);
 
     int insertSelective(Schedulemgt record);
 
     List<Schedulemgt> selectByExample(SchedulemgtExample example);
 
+    Schedulemgt selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") Schedulemgt record, @Param("example") SchedulemgtExample example);
 
     int updateByExample(@Param("record") Schedulemgt record, @Param("example") SchedulemgtExample example);
+
+    int updateByPrimaryKeySelective(Schedulemgt record);
+
+    int updateByPrimaryKey(Schedulemgt record);
 }

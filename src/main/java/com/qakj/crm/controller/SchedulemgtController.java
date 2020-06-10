@@ -23,4 +23,12 @@ public class SchedulemgtController {
 		map.put("data", list);
 		return map;
 	}
+	@RequestMapping("/addSchedulemgt")
+	public Object addSchedulemgt(Schedulemgt s){
+		ss.addSchedulemgt(s);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("code", "200");
+		map.put("msg", "添加成功");
+		return map;
+	}
 }

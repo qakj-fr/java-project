@@ -1,6 +1,8 @@
 package com.qakj.crm.pojo;
 
 public class Schedulemgt {
+    private Integer id;
+
     private String nineclock;
 
     private String twelveclock;
@@ -8,6 +10,14 @@ public class Schedulemgt {
     private String fourteenclock;
 
     private String seventeenclock;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNineclock() {
         return nineclock;

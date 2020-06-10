@@ -6,4 +6,5 @@ import com.qakj.crm.pojo.Schedulemgt;
 
 public interface SchedulemgtService {
 		List<Schedulemgt> findAll();
+		void addSchedulemgt(Schedulemgt s);
 }
