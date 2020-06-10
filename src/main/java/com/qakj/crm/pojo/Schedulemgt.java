@@ -2,7 +2,6 @@ package com.qakj.crm.pojo;
 
 public class Schedulemgt {
     private Integer id;
-
     
     private String nineclock;
 
